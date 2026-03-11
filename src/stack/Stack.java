@@ -2,127 +2,127 @@ package stack;
 
 /**
  * Generic Stack implementation using an array.
- * Stack arbeitet nach dem LIFO Prinzip (Last In First Out):
- * Das zuletzt eingefügte Element wird zuerst wieder entfernt.
+ * The stack follows the LIFO principle (Last In First Out):
+ * The last inserted element is the first one to be removed.
  *
- * @param <T> Datentyp der Elemente im Stack (Generic)
+ * @param <T> Data type of the elements stored in the stack (Generic)
  */
 public class Stack<T> {
 
-    // Array, in dem die Stack-Elemente gespeichert werden
-    // Object wird verwendet, weil Generics keine Arrays direkt erlauben
+    // Array that stores the stack elements
+    // Object is used because Java does not allow direct generic arrays
     private Object[] elements;
 
-    // Index des obersten Elements im Stack
-    // -1 bedeutet: Stack ist leer
+    // Index of the top element in the stack
+    // -1 means the stack is empty
     private int top;
 
     /**
-     * Default-Konstruktor
-     * Erstellt einen Stack mit der Standardgröße 10
+     * Default constructor
+     * Creates a stack with the default size of 10
      */
     public Stack() {
 
-        // Array mit Platz für 10 Elemente erstellen
+        // Create an array with space for 10 elements
         elements = new Object[10];
 
-        // Stack ist am Anfang leer → top = -1
+        // Stack is initially empty → top = -1
         top = -1;
     }
 
     /**
-     * Konstruktor mit frei wählbarer Größe
+     * Constructor with custom capacity
      */
     public Stack(int capacity) {
 
-        // Array mit der gewünschten Kapazität erstellen
+        // Create an array with the given capacity
         elements = new Object[capacity];
 
-        // Stack startet leer
+        // Stack starts empty
         top = -1;
     }
 
     /**
-     * Fügt ein Element oben auf den Stack (push)
+     * Adds an element to the top of the stack (push)
      */
     public void push(T value) throws StackFullException {
 
-        // Prüfen ob der Stack voll ist
-        // Wenn top am letzten Index des Arrays ist, gibt es keinen Platz mehr
+        // Check if the stack is full
+        // If top is at the last index of the array, there is no space left
         if (top == elements.length - 1) {
 
-            // Exception werfen, weil kein Platz mehr vorhanden ist
+            // Throw an exception because the stack is full
             throw new StackFullException("Stack is full!");
         }
 
-        // Top-Index um 1 erhöhen (wir gehen eine Position nach oben)
+        // Increase the top index (move one position up)
         top++;
 
-        // Neues Element an dieser Position speichern
+        // Store the new element at this position
         elements[top] = value;
     }
 
     /**
-     * Entfernt und liefert das oberste Element des Stacks (pop)
+     * Removes and returns the top element of the stack (pop)
      */
     public T pop() throws StackEmptyException {
 
-        // Prüfen ob Stack leer ist
+        // Check if the stack is empty
         if (top == -1) {
 
-            // Exception werfen, da kein Element entfernt werden kann
+            // Throw an exception because no element can be removed
             throw new StackEmptyException("Stack is empty!");
         }
 
-        // Element vom Stack holen
-        // Cast nötig, da Array vom Typ Object ist
+        // Retrieve the element from the stack
+        // Cast is necessary because the array type is Object
         T value = (T) elements[top];
 
-        // Top-Index um 1 reduzieren (ein Element weniger im Stack)
+        // Decrease the top index (one element less in the stack)
         top--;
 
-        // Entferntes Element zurückgeben
+        // Return the removed element
         return value;
     }
 
     /**
-     * Gibt das oberste Element zurück ohne es zu entfernen (peek)
+     * Returns the top element without removing it (peek)
      */
     public T peek() throws StackEmptyException {
 
-        // Prüfen ob Stack leer ist
+        // Check if the stack is empty
         if (top == -1) {
 
-            // Exception werfen, weil kein Element vorhanden ist
+            // Throw an exception because no element exists
             throw new StackEmptyException("Stack is empty!");
         }
 
-        // Oberstes Element zurückgeben (Cast zu T notwendig)
+        // Return the top element (cast to T required)
         return (T) elements[top];
     }
 
     /**
-     * Gibt alle Elemente des Stacks als String zurück
-     * Elemente werden mit ";" getrennt
+     * Returns all elements of the stack as a String
+     * Elements are separated by ";"
      */
     public String list() {
 
-        // String für das Ergebnis
+        // String that stores the result
         String result = "";
 
-        // Schleife über alle vorhandenen Elemente im Stack
+        // Loop through all elements currently in the stack
         for (int i = 0; i <= top; i++) {
 
-            // Element zum Ergebnisstring hinzufügen
+            // Add the element to the result string
             result += elements[i];
 
-            // Wenn es nicht das letzte Element ist → ; hinzufügen
+            // If it is not the last element → add ";"
             if (i < top) {
                 result += ";";
             }
         }
 
-        // Gesamten String zurückgeben
+        // Return the final string
         return result;
     }
 }
