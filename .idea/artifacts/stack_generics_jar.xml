@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="stack generics:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/stack_generics_jar</output-path>
+    <root id="archive" name="stack generics.jar">
+      <element id="module-output" name="stack generics" />
+    </root>
+  </artifact>
+</component>
